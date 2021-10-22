@@ -6,6 +6,7 @@ import {
   LinkOverlay,
   Text
 } from '@chakra-ui/layout'
+import { Link } from 'react-router-dom'
 
 import PhotoProfile from '../PhotoProfile'
 
@@ -14,7 +15,7 @@ const MiniCard = () => {
     <LinkBox w="full" display="flex">
       <PhotoProfile />
       <Box ml={5}>
-        <LinkOverlay href="#">
+        <LinkOverlay as={Link} to="/hall">
           <Text>Jhon Doe</Text>
         </LinkOverlay>
         <Text as="small" color="gray.500">

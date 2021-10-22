@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import Loading from '../components/Loading'
 
 const HomePage = lazy(() => import('../pages/HomePage'))
+const HallPage = lazy(() => import('../pages/HallPage'))
 
 const HomeRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const HomeRoutes = () => {
       <Layout>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/hall" component={HallPage} />
 
           <Redirect from="/auth/login" to="/" />
         </Switch>

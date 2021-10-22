@@ -1,19 +1,22 @@
 import { IconButton } from '@chakra-ui/button'
 import { BellIcon, SearchIcon } from '@chakra-ui/icons'
 import { Box, Flex, HStack, Text } from '@chakra-ui/layout'
+import { Link } from 'react-router-dom'
 
-const NavbarItem = ({ label, isActive }) => (
-  <Box
-    pb={1}
-    cursor="pointer"
-    borderWidth="thin"
-    borderColor="transparent"
-    transition="border 0.3s ease"
-    _hover={{ borderBottomColor: 'primary.500' }}
-    borderBottomColor={isActive ? 'primary.500' : ''}
-  >
-    <Text>{label}</Text>
-  </Box>
+const NavbarItem = ({ label, isActive, to = '/' }) => (
+  <Link to={to}>
+    <Box
+      pb={1}
+      cursor="pointer"
+      borderWidth="thin"
+      borderColor="transparent"
+      transition="border 0.3s ease"
+      _hover={{ borderBottomColor: 'primary.500' }}
+      borderBottomColor={isActive ? 'primary.500' : ''}
+    >
+      <Text>{label}</Text>
+    </Box>
+  </Link>
 )
 
 const Navbar = () => {

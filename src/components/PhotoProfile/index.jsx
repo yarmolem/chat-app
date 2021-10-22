@@ -6,12 +6,14 @@ const PhotoProfile = ({ online }) => {
     <Box pos="relative">
       <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
       <Box
-        w={3}
-        h={3}
-        right={0}
-        bottom={0}
+        w={5}
+        h={5}
+        right={-1}
+        bottom={-1}
         pos="absolute"
         rounded="full"
+        borderWidth={4}
+        borderColor="gray.700"
         bg={online ? 'green' : 'red.500'}
       />
     </Box>
