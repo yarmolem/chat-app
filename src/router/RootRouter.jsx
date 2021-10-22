@@ -1,14 +1,13 @@
+import { useEffect } from 'react'
+
 import HomeRoutes from './HomeRoutes'
 import AuthRoutes from './AuthRoutes'
 import useAuthContext from '../hooks/useAuthContext'
-import { useEffect } from 'react'
 import useFetchLazyQuery from '../hooks/useFetchLazyQuery'
 
 const RootRouter = () => {
+  const [renewSession] = useFetchLazyQuery({ path: '/auth' })
   const { isAuth, loginAction, logoutAction } = useAuthContext()
-  const [renewSession] = useFetchLazyQuery({
-    path: '/auth'
-  })
 
   useEffect(() => {
     const token = localStorage.getItem('token')

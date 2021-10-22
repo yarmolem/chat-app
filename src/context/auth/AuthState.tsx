@@ -3,9 +3,23 @@ import { useReducer, createContext } from 'react'
 import AuthReducer from './AuthReducer'
 import { authActions } from './AuthActions'
 
-export const AuthContext = createContext()
+export interface Auth {
+  uid: string
+  name: string
+  email: string
+  online: boolean
+  isAuth: boolean
+  isLoading: boolean
+}
 
-export const initialState = {
+export interface AuthContextProps extends Auth {
+  loginAction: void
+  logoutAction: void
+}
+
+export const AuthContext = createContext<AuthContextProps>({})
+
+export const initialState: Auth = {
   uid: '',
   name: '',
   email: '',

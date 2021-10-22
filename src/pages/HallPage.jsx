@@ -1,9 +1,8 @@
 import { Avatar } from '@chakra-ui/avatar'
 import { Box, Container, Flex, Heading, Text } from '@chakra-ui/layout'
-import MessagesList from '../components/MessagesList'
-import PhotoProfile from '../components/PhotoProfile'
 
 import SendMessage from '../components/SendMessage'
+import MessagesList from '../components/MessagesList'
 
 const HallPage = () => {
   return (

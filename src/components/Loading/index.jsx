@@ -5,7 +5,7 @@ const Loading = () => {
   return (
     <Center h="100vh">
       <Flex flexDir="column" justifyContent="center" alignItems="center">
-        <Spinner />
+        <Spinner mb={5} />
         <Heading>Loading...</Heading>
       </Flex>
     </Center>
