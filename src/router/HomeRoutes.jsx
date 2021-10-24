@@ -9,16 +9,16 @@ const HallPage = lazy(() => import('../pages/HallPage'))
 
 const HomeRoutes = () => {
   return (
-    <Suspense fallback={<Loading />}>
-      <Layout>
+    <Layout>
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/hall" component={HallPage} />
+          <Route exact path="/hall/:uid" component={HallPage} />
 
           <Redirect from="/auth/login" to="/" />
         </Switch>
-      </Layout>
-    </Suspense>
+      </Suspense>
+    </Layout>
   )
 }
 

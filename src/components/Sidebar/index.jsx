@@ -1,8 +1,8 @@
 import { SearchIcon } from '@chakra-ui/icons'
-import { Box, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/layout'
+import { Box, Flex, Heading, Text } from '@chakra-ui/layout'
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
 
-import MiniCard from '../MiniCard'
+import ChatList from './ChatList'
 import LogoutButton from '../LogoutButton'
 import useAuthContext from '../../hooks/useAuthContext'
 
@@ -35,19 +35,7 @@ const Sidebar = () => {
       </InputGroup>
 
       <Box flex={1} maxH="full" overflowY="auto">
-        <Stack
-          px={4}
-          py={6}
-          spacing={6}
-          rounded="2xl"
-          bg="gray.700"
-          divider={<Divider />}
-        >
-          <MiniCard />
-          <MiniCard />
-          <MiniCard />
-          <MiniCard />
-        </Stack>
+        <ChatList />
       </Box>
     </Flex>
   )

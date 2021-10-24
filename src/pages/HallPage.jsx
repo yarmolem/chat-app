@@ -1,10 +1,40 @@
+import { useEffect } from 'react'
 import { Avatar } from '@chakra-ui/avatar'
 import { Box, Container, Flex, Heading, Text } from '@chakra-ui/layout'
 
+import useFetchQuery from '../hooks/useFetchQuery'
 import SendMessage from '../components/SendMessage'
+import useChatContext from '../hooks/useChatContext'
 import MessagesList from '../components/MessagesList'
+import { scrollToBottom } from '../utils/scrollToBottom'
 
-const HallPage = () => {
+const HallPage = ({ location }) => {
+  const { users, setActiveChat, cleanChat, loadMessages } = useChatContext()
+  const userData = useFetchQuery({ path: `/users/${location.state.uid}` })
+  useFetchQuery({
+    path: `/messages/${location.state.uid}`,
+    onComplete: (data) => {
+      loadMessages(data.messages)
+      scrollToBottom('messages-list')
+    }
+  })
+
+  useEffect(() => {
+    setActiveChat(location.state.uid)
+    return () => cleanChat()
+  }, [location.state])
+
+  useEffect(() => {
+    userData.refetch()
+  }, [users])
+
+  const userPlaceholder = {
+    name: 'Test Test',
+    online: false
+  }
+
+  const user = userData.data ? userData.data.user : userPlaceholder
+
   return (
     <Container
       p={5}
@@ -14,18 +44,15 @@ const HallPage = () => {
       flexDir="column"
       maxW="container.md"
     >
-      <Flex align="center">
-        <Avatar
-          size="lg"
-          mr={2}
-          name="Segun Adebayo"
-          src="https://bit.ly/sage-adebayo"
-        />
+      <Flex align="center" pb={3}>
+        <Avatar mr={2} size="lg" name={user.name} />
         <Box>
-          <Heading m={0} lineHeight="1em">
-            Jhon Doe
+          <Heading m={0} lineHeight="1.2em">
+            {user.name}
           </Heading>
-          <Text color="green.500">online</Text>
+          <Text color={user.online ? 'green.500' : 'red.500'}>
+            {user.online ? 'online' : 'offline'}
+          </Text>
         </Box>
       </Flex>
 

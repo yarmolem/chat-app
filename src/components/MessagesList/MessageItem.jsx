@@ -1,6 +1,7 @@
 import { Flex, Text } from '@chakra-ui/layout'
+import { formatHour } from '../../utils/formatDate'
 
-const MessageItem = ({ children, isYou }) => {
+const MessageItem = ({ children, isYou, date }) => {
   return (
     <Flex
       px={3}
@@ -17,7 +18,7 @@ const MessageItem = ({ children, isYou }) => {
         color="gray.400"
         textAlign={isYou ? 'right' : 'left'}
       >
-        09:15
+        {formatHour(date)}
       </Text>
     </Flex>
   )

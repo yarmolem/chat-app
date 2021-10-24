@@ -26,9 +26,8 @@ const Navbar = () => {
         <NavbarItem label="HOME" />
         <NavbarItem label="CHAT" isActive />
         <NavbarItem label="CONTACTS" />
-        <NavbarItem label="SETTINGS" />
-        <NavbarItem label="FAQS" />
-        <NavbarItem label="TERMS OF USE" />
+      </HStack>
+      <HStack ml={2}>
         <IconButton
           variant="ghost"
           colorScheme="primary"

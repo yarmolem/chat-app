@@ -10,13 +10,16 @@ import { Link } from 'react-router-dom'
 
 import PhotoProfile from '../PhotoProfile'
 
-const MiniCard = () => {
+const MiniCard = ({ user }) => {
   return (
     <LinkBox w="full" display="flex">
-      <PhotoProfile />
+      <PhotoProfile online={user.online} name={user.name} />
       <Box ml={5}>
-        <LinkOverlay as={Link} to="/hall">
-          <Text>Jhon Doe</Text>
+        <LinkOverlay
+          as={Link}
+          to={{ pathname: `/hall/${user.uid}`, state: user }}
+        >
+          <Text>{user.name}</Text>
         </LinkOverlay>
         <Text as="small" color="gray.500">
           Hi There, How are you?

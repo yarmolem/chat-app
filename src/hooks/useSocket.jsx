@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 
 const useSocket = (serverPath) => {
-  const socket = useRef()
+  const [socket, setSocket] = useState(null)
   const [online, setOnline] = useState(false)
 
   const connectSocket = useCallback(() => {
@@ -15,30 +15,30 @@ const useSocket = (serverPath) => {
       query: { 'x-token': token }
     })
 
-    socket.current = socketTemp
+    setSocket(socketTemp)
   }, [serverPath])
 
   const disconnectSocket = useCallback(() => {
-    socket.current?.disconnect()
-  }, [socket.current])
+    socket?.disconnect()
+  }, [socket])
 
   useEffect(() => {
-    socket.current?.on('connect', () => {
+    socket?.on('connect', () => {
       setOnline(true)
     })
   }, [socket])
 
   useEffect(() => {
-    socket.current?.on('disconnect', () => {
+    socket?.on('disconnect', () => {
       setOnline(false)
     })
   }, [socket])
 
   return {
     online,
+    socket,
     connectSocket,
-    disconnectSocket,
-    socket: socket.current
+    disconnectSocket
   }
 }
 

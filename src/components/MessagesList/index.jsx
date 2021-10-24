@@ -1,7 +1,12 @@
 import { Stack } from '@chakra-ui/layout'
+import useAuthContext from '../../hooks/useAuthContext'
+import useChatContext from '../../hooks/useChatContext'
 import MessageItem from './MessageItem'
 
 const MessagesList = () => {
+  const { uid } = useAuthContext()
+  const { messages } = useChatContext()
+
   return (
     <Stack
       py={5}
@@ -11,6 +16,7 @@ const MessagesList = () => {
       h="full"
       maxW="full"
       pos="absolute"
+      id="messages-list"
       overflowY="scroll"
       pr={2}
       sx={{
@@ -25,8 +31,15 @@ const MessagesList = () => {
         }
       }}
     >
-      <MessageItem>Hola como estas ?</MessageItem>
-      <MessageItem isYou>Hola, bien y tu como andas ?</MessageItem>
+      {messages.map(({ from, to, message, _id, createdAt }) => (
+        <MessageItem
+          date={createdAt}
+          isYou={from === uid}
+          key={`message-${_id}`}
+        >
+          {message}
+        </MessageItem>
+      ))}
     </Stack>
   )
 }

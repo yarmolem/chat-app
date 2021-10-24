@@ -3,7 +3,7 @@ import { useReducer, createContext } from 'react'
 import AuthReducer from './AuthReducer'
 import { authActions } from './AuthActions'
 
-export interface Auth {
+export interface AuthStateValue {
   uid: string
   name: string
   email: string
@@ -12,14 +12,12 @@ export interface Auth {
   isLoading: boolean
 }
 
-export interface AuthContextProps extends Auth {
-  loginAction: void
-  logoutAction: void
+export interface AuthStateActions extends AuthStateValue {
+  loginAction?: void
+  logoutAction?: void
 }
 
-export const AuthContext = createContext<AuthContextProps>({})
-
-export const initialState: Auth = {
+export const initialState: AuthStateValue = {
   uid: '',
   name: '',
   email: '',
@@ -27,6 +25,8 @@ export const initialState: Auth = {
   isAuth: false,
   isLoading: false
 }
+
+export const AuthContext = createContext<AuthStateActions>({})
 
 const AuthState = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState)

@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 
-const useFetchQuery = ({ url = '', method = 'GET', onError, onComplete }) => {
+const useFetchQuery = ({
+  url = 'http://localhost:8080/api',
+  path = '',
+  method = 'GET',
+  onError,
+  onComplete
+}) => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -20,16 +26,21 @@ const useFetchQuery = ({ url = '', method = 'GET', onError, onComplete }) => {
     async (payload) => {
       setLoading(true)
 
-      const config = {}
+      const config = {
+        headers: { 'x-token': localStorage.getItem('token') ?? '' }
+      }
 
       if (payload && method !== 'GET') {
         config.method = method
         config.body = JSON.stringify(payload)
-        config.headers = { 'Content-Type': 'application/json' }
+        config.headers = {
+          ...config.headers,
+          'Content-Type': 'application/json'
+        }
       }
 
       try {
-        const res = await fetch(url)
+        const res = await fetch(url + path, config)
         const data = await res.json()
         setData(data)
         if (typeof onComplete === 'function') {
@@ -41,12 +52,12 @@ const useFetchQuery = ({ url = '', method = 'GET', onError, onComplete }) => {
 
       setLoading(false)
     },
-    [handleError, method, onComplete, url]
+    [handleError, method, onComplete, url, path]
   )
 
   useEffect(() => {
     if (url.trim() !== '') handleFetch()
-  }, [url, handleFetch])
+  }, [url, path])
 
   return { loading, data, refetch: handleFetch }
 }

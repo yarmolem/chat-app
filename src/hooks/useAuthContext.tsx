@@ -1,9 +1,8 @@
 import { useContext } from 'react'
-import { AuthContext, AuthContextProps } from '../context/auth/AuthState'
+import { AuthContext, AuthStateActions } from '../context/auth/AuthState'
 
 const useAuthContext = () => {
-  const context: AuthContextProps = useContext(AuthContext)
-
+  const context: AuthStateActions = useContext(AuthContext)
   return { ...context }
 }
 

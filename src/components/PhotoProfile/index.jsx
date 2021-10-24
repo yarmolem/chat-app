@@ -1,10 +1,10 @@
 import { Box } from '@chakra-ui/layout'
 import { Avatar } from '@chakra-ui/avatar'
 
-const PhotoProfile = ({ online }) => {
+const PhotoProfile = ({ online, name }) => {
   return (
     <Box pos="relative">
-      <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+      <Avatar name={name} />
       <Box
         w={5}
         h={5}
