@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
 const useFetchLazyQuery = ({
-  url = 'http://localhost:8080/api',
+  // url = 'http://localhost:8080/api',
+  url = 'https://yarmo-chat-server.herokuapp.com/api',
   path = '',
   method = 'GET',
   onError,

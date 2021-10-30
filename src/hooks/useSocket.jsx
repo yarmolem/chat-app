@@ -15,6 +15,8 @@ const useSocket = (serverPath) => {
       query: { 'x-token': token }
     })
 
+    console.log(socketTemp)
+
     setSocket(socketTemp)
   }, [serverPath])
 

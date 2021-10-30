@@ -5,11 +5,14 @@ import useAuthContext from '../../hooks/useAuthContext'
 
 export const SocketContext = createContext()
 
-const API = { DEV: 'http://localhost:8080' }
+const API = {
+  DEV: 'http://localhost:8080',
+  PRD: 'https://yarmo-chat-server.herokuapp.com/'
+}
 
 const SocketState = ({ children }) => {
   const { isAuth } = useAuthContext()
-  const { online, socket, ...actions } = useSocket(API.DEV)
+  const { online, socket, ...actions } = useSocket(API.PRD)
 
   useEffect(() => {
     if (isAuth) {
